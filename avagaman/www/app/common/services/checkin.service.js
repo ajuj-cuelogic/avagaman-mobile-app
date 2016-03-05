@@ -5,7 +5,7 @@ angular.module('checkin.service', [])
     var DEFAULT_VAL = {};
         DEFAULT_VAL.LAT = 18.5335588,  // cuelogic lat 
         DEFAULT_VAL.LONG = 73.8781422;  // cuelogic long 
-        DEFAULT_VAL.RADIUS = 8;  // in meters
+        DEFAULT_VAL.RADIUS = 12;  // in meters
         DEFAULT_VAL.STATUS_CHECKIN = '1'; 
         DEFAULT_VAL.STATUS_CHECKOUT = '0';  
     var service = {};

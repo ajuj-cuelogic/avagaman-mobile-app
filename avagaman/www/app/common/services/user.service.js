@@ -1,18 +1,29 @@
-angular.module('dashboard.service', [])
+angular.module('user.service', [])
 
 
-.service('DashboardService', function(webService,storageService) {
+.service('UserService', function(webService,storageService) {
     var user = storageService.getSession();
     var service = {};
     
-    service.getDashboardData = getDashboardData;
+    service.getUsersData = getUsersData;
+    service.notifyUser = notifyUser;
     
     return service;
     
     
-    function getDashboardData( callback ) {
+    function getUsersData( callback ) {
         
-        webService.get('get/user/dashboard/' + user._id ,{} , callback);
+        webService.get('get/all/users' ,{} , callback);
+        
+    }
+    function notifyUser( toUser , callback ) {
+        
+        console.log(typeof(toUser.logState));
+        
+        webService.post('user/notify' ,{    username: user.username,
+                                            toUserId: toUser._id,
+                                            isNotified: toUser.logState.toString()
+                                        } , callback);
         
     }
 })

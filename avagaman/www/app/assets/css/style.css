@@ -34,3 +34,8 @@
 .row {
     padding: 5px 0;
 }
+.clear {
+    padding: 10px;
+    display: block;
+    cursor: pointer;
+}

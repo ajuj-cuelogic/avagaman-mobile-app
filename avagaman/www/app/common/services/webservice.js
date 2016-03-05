@@ -7,8 +7,8 @@ angular.module('webservice.service',[])
  */
 function webserviceService($http) {
 
-//    var webServiceUrl = 'http://192.168.10.65:3001/'; // 'http://52.36.9.139:3001/'; // Api base URL
-    var webServiceUrl = 'http://52.36.9.139:3001/'; // Api base URL
+    var webServiceUrl = 'http://192.168.10.65:3001/'; // 'http://52.36.9.139:3001/'; // Api base URL
+//    var webServiceUrl = 'http://52.36.9.139:3001/'; // Api base URL
     var service = {};
     service.get = get;
     service.post = post;

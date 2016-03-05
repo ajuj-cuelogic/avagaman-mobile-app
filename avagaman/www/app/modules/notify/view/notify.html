@@ -1,5 +1,30 @@
 <ion-view view-title="Notify">
-  <ion-content class="padding">
-      <h2>Welcome To notify</h2>
+  <ion-content  class="padding">
+      
+        <label class="item item-input">
+          <input type="text" placeholder="Search By Name" ng-model="search">
+          
+        </label>
+      
+      <div class="list margin-bottom">
+        <div class="item item-divider">All Employees</div>
+        <div class="row header">
+          <div class="col">Name</div>
+          <div class="col">Email</div>
+          <div class="col">Checked In/Out</div>
+          <div class="col">Notify</div>
+        </div>
+        <div class="row "  ng-repeat="user in usersData |  filter:search ">
+          <div class="col">{{user.firstName}} {{user.lastName}}</div>
+          <div class="col">{{user.username}}</div>
+          <div class="col">
+              <p ng-if="user.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKIN">Checked-In</p>
+              <p ng-if="user.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKOUT">Checked-Out</p>
+              <p ng-if="user.logState == null">Checked-Out</p>
+          </div>
+          <div class="col"><button class="button  button-balanced" ng-click="notifyUser(user)">Notify</button></div>
+        </div>
+    </div>
+      
   </ion-content>
 </ion-view>

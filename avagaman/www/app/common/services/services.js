@@ -6,5 +6,6 @@ angular.module('services', [
     'getGeo.factory',
     'checkin.service',
     'dashboard.service',
+    'user.service',
 ]);
 
