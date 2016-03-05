@@ -8,12 +8,24 @@
         <p> app request {{count}} </p>
         <p> Is Background {{isBackground}} </p>
         <p> Is Background {{cordova}} </p>
-    <div ng-if="currentState == 1"  class="button-bar bar-balanced margin-bottom">
+    <div ng-if="currentState == CheckinService_DEFAULT_VAL.STATUS_CHECKIN"  class="button-bar bar-balanced margin-bottom">
         <a class="button button-raised ink-dark"> You Are Checked-in </a> 
     </div>
     
-    <div ng-if="currentState == 0"  class="button-bar bar-assertive margin-bottom"> 
+    <div ng-if="currentState == CheckinService_DEFAULT_VAL.STATUS_CHECKOUT"  class="button-bar bar-assertive margin-bottom"> 
         <a class="button button-raised ink-dark"> You Are Checked-out</a> 
     </div>
+        
+    <div class="list margin-bottom">
+        <div class="item item-divider">Today's History</div>
+        <div class="item item-icon-left"  ng-repeat="history in dashboardData.userTodayHistory">
+            <i ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKIN" class="icon ion-arrow-down-c color-green"></i>
+            <i ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKOUT" class="icon ion-arrow-up-c color-red"></i>
+            <span ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKOUT"> Checked-Out at {{history.logTime | date : 'shortTime'}}</span>
+            <span ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKIN"> Checked-In at {{history.logTime | date : 'shortTime'}}</span>
+           
+        </div>
+    </div>
+        
   </ion-content>
 </ion-view>

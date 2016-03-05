@@ -5,7 +5,7 @@ angular.module('checkin.service', [])
     var DEFAULT_VAL = {};
         DEFAULT_VAL.LAT = 18.5335588,  // cuelogic lat 
         DEFAULT_VAL.LONG = 73.8781422;  // cuelogic long 
-        DEFAULT_VAL.RADIUS = 100;  // in meters
+        DEFAULT_VAL.RADIUS = 8;  // in meters
         DEFAULT_VAL.STATUS_CHECKIN = '1'; 
         DEFAULT_VAL.STATUS_CHECKOUT = '0';  
     var service = {};
@@ -13,6 +13,7 @@ angular.module('checkin.service', [])
     service.check = check;
     service.checkIn = checkIn;
     service.checkOut = checkOut;
+    service.clearGeoIntervelTime = clearGeoIntervelTime;
     return service;
     
     
@@ -39,5 +40,9 @@ angular.module('checkin.service', [])
     function getDistance(callback) {
         
         getGeo.begin(DEFAULT_VAL.LAT,DEFAULT_VAL.LONG, callback);
+    }
+    function clearGeoIntervelTime() {
+        
+        getGeo.end();
     }
 })

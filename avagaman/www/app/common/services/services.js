@@ -5,5 +5,6 @@ angular.module('services', [
     'webservice.service',
     'getGeo.factory',
     'checkin.service',
+    'dashboard.service',
 ]);
 

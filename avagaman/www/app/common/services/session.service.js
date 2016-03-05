@@ -8,7 +8,7 @@ angular.module('session.service', [])
         var currentUser = storageService.getSession(),
             username = currentUser ? currentUser.username : null;
         if (username) {
-            console.log(config);
+//            console.log(config);
         } else {
             $rootScope.$broadcast('unauthorized');
         }
