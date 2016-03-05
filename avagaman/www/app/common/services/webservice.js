@@ -7,7 +7,7 @@ angular.module('webservice.service',[])
  */
 function webserviceService($http) {
 
-    var webServiceUrl = ''; 
+    var webServiceUrl = 'http://192.168.10.65:3001/';  // Api base URL
     var service = {};
     service.get = get;
     service.post = post;
@@ -21,7 +21,10 @@ function webserviceService($http) {
             $http({
                 method: method,
                 url:webServiceUrl + url,
-                data : data
+                data : data,
+                headers: {
+                    'Content-type': 'application/json'
+                }
             }).
             then(function(data) {
                     callback(data);

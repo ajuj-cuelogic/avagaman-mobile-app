@@ -5,20 +5,29 @@ angular.module('login.controller', [])
     $scope.data = {};
  
     $scope.login = function() {
-        
-        LoginService.login($scope.data.username, $scope.data.password , function (data) {
-            console.log(data);
-            if(data == 'success') {
-                storageService.setSession($scope.data.username);
-                $state.go('index.dashboard');
-            }
-            else {
-                 var alertPopup = $ionicPopup.alert({
-                    title: 'Login failed!',
-                    template: 'Please check your credentials!'
-                });
-            }
-            
+        if($scope.data.username && $scope.data.password)
+        {
+            LoginService.login($scope.data.username, $scope.data.password , function (data) {
+                
+                if(data.status == 200) {
+                    storageService.setSession(data.data.data);
+                    $state.go('index.dashboard');
+                }
+                else {
+                    $scope.alertPopup('Login failed!' , 'Please check your credentials!');
+                }
+            });
+        }
+        else
+        {
+            $scope.alertPopup('Login failed!' , 'Please enter username and password!!');
+        }
+    }
+    
+    $scope.alertPopup = function(title , message) {
+        $ionicPopup.alert({
+                        title: title,
+                        template: message
         });
     }
     

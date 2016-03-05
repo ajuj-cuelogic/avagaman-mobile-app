@@ -11,10 +11,9 @@ angular.module('storage.service', [])
     return service;
     
     function setSession(user) {
-        var currentUser = {
-            user : user
-        };
-        return localStorageService.set(session_store_key, currentUser);
+        
+//        _s => token , _id => user id
+        return localStorageService.set(session_store_key, user);
     }
 
     function getSession() {
