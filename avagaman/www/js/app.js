@@ -8,7 +8,9 @@
 angular.module('starter', [
     'ionic',
     'services',
-    'login'
+    'login',
+    'index',
+    'dashboard',
 ])
 
 .run(function($ionicPlatform) {
@@ -40,6 +42,21 @@ angular.module('starter', [
         url: '/login',
         templateUrl: 'app/modules/login/view/login.html',
         controller : 'LoginCtrl',
+  })
+  
+    .state('index', {
+        url: '/index',
+        templateUrl: 'app/modules/index/view/index.html',
+        controller: 'indexCtrl'
+    })
+    .state('index.dashboard', {
+        url: '/dashboard',
+        views: {
+          'index-dashboard': {
+            templateUrl: 'app/modules/dashboard/view/dashboard.html',
+            controller: 'dashboardCtrl'
+          }
+        }
   })
   
 

@@ -1,1 +1,36 @@
-/* Empty. Add your own CSS if you like */
+.color-green{
+    color:green;
+}
+.color-red{
+    color:red;
+}
+.margin-bottom {
+    margin-bottom: 20px;
+}
+.border-top {
+    border-top: solid 1px #ccc;
+    padding-top: 30px;
+}
+
+.header .col {
+    background-color:lightgrey;
+}
+
+.col {
+    border: solid 1px grey;
+    border-bottom-style: none;
+    border-right-style: none;
+    overflow: hidden;
+}
+
+.col:last-child {
+    border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+    border-bottom: solid 1px grey;
+}
+
+.row {
+    padding: 5px 0;
+}
