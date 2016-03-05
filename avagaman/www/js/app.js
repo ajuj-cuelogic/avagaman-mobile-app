@@ -7,10 +7,13 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
     'ionic',
+    'ngCordova',
+    'LocalStorageModule',
     'services',
     'login',
     'index',
     'dashboard',
+    'notify',
 ])
 
 .run(function($ionicPlatform) {
@@ -29,7 +32,7 @@ angular.module('starter', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -59,8 +62,18 @@ angular.module('starter', [
         }
   })
   
+  .state('index.notify', {
+      url: '/notify',
+      views: {
+        'index-notify': {
+            templateUrl: 'app/modules/notify/view/notify.html',
+            controller: 'notifyCtrl'
+        }
+      }
+    })
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
+    $httpProvider.interceptors.push('sessionService');
 
 });

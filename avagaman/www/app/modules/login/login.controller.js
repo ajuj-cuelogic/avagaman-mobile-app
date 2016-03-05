@@ -1,6 +1,6 @@
 angular.module('login.controller', [])
 
-.controller('LoginCtrl', function($scope,LoginService,$state,$ionicPopup) {
+.controller('LoginCtrl', function($scope,LoginService,$state,$ionicPopup,storageService) {
     
     $scope.data = {};
  
@@ -9,6 +9,7 @@ angular.module('login.controller', [])
         LoginService.login($scope.data.username, $scope.data.password , function (data) {
             console.log(data);
             if(data == 'success') {
+                storageService.setSession($scope.data.username);
                 $state.go('index.dashboard');
             }
             else {
