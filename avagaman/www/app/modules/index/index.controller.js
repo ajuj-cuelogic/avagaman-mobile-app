@@ -2,20 +2,19 @@ angular.module('index.controller', [])
 
 .controller('indexCtrl', function($scope,$rootScope,storageService,$location) {
     
-    var main = this;
-    main.user = storageService.getSession();
+    $scope.user = storageService.getSession();
     
-    if(!main.user) {
+    if(!$scope.user) {
         $location.path('/login');
     }
-    main.logout = function (){
-        main.user = null;
+    $scope.logout = function (){
+        $scope.user = null;
         storageService.logout();
         $location.path('/login');
     }
     
     $rootScope.$on('unauthorized', function() {
-        main.logout();
+        $scope.logout();
     });
     
 })
