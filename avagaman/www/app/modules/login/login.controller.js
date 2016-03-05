@@ -14,7 +14,7 @@ angular.module('login.controller', [])
                     $state.go('index.dashboard');
                 }
                 else {
-                    $scope.alertPopup('Login failed!' , 'Please check your credentials!');
+                    $scope.alertPopup('Login failed!' , 'Please check your email and password!');
                 }
             });
         }

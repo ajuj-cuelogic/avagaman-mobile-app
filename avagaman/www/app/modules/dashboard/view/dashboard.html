@@ -1,6 +1,19 @@
 <ion-view view-title="Dashboard"> 
   <ion-content class="padding">
       <h2>Welcome To Dashboard</h2>
-      
+      <h2>Lat: {{position.lat}}</h2>
+        <h2>Long: {{position.long}}</h2>
+        <h2>distance: {{distance}}</h2>
+        
+        <p> app request {{count}} </p>
+        <p> Is Background {{isBackground}} </p>
+        <p> Is Background {{cordova}} </p>
+    <div ng-if="currentState == 1"  class="button-bar bar-balanced margin-bottom">
+        <a class="button button-raised ink-dark"> You Are Checked-in </a> 
+    </div>
+    
+    <div ng-if="currentState == 0"  class="button-bar bar-assertive margin-bottom"> 
+        <a class="button button-raised ink-dark"> You Are Checked-out</a> 
+    </div>
   </ion-content>
 </ion-view>

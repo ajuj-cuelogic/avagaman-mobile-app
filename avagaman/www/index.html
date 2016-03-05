@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -42,6 +43,8 @@
     
     
     <!-- common files -->
+    <script src="app/common/services/checkin.service.js"></script>
+    <script src="app/common/services/getgeo.factory.js"></script>
     <script src="app/common/services/webservice.js"></script>
     <script src="app/common/services/storage.service.js"></script>
     <script src="app/common/services/session.service.js"></script>

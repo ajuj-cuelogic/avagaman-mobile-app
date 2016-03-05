@@ -3,5 +3,7 @@ angular.module('services', [
     'session.service',
     'storage.service',
     'webservice.service',
+    'getGeo.factory',
+    'checkin.service',
 ]);
 
