@@ -10,6 +10,7 @@ angular.module('index.controller', [])
   
     $scope.user = storageService.getSession();
     
+    console.log($scope.user);
     if(!$scope.user) {
         $location.path('/login');
     }
@@ -72,7 +73,7 @@ angular.module('index.controller', [])
       
       
  
-} , false);
+} );
 
     
     $scope.check();

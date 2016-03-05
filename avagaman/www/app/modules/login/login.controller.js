@@ -8,9 +8,8 @@ angular.module('login.controller', [])
         if($scope.data.username && $scope.data.password)
         {
             LoginService.login($scope.data.username, $scope.data.password , function (data) {
-                
                 if(data.status == 200) {
-                    storageService.setSession(data.data.data);
+                    storageService.setSession(data.data.data.user);
                     $state.go('index.dashboard');
                 }
                 else {

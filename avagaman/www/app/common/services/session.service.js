@@ -6,10 +6,8 @@ angular.module('session.service', [])
     service.request = function(config) { 
         
         var currentUser = storageService.getSession(),
-            access_token = currentUser ? currentUser.__s : null;
-        console.log(currentUser);
-        if (access_token) {
-            config.headers.authorization = access_token;
+            username = currentUser ? currentUser.username : null;
+        if (username) {
             console.log(config);
         } else {
             $rootScope.$broadcast('unauthorized');
