@@ -72,7 +72,6 @@ angular.module('index.controller', [])
                            $scope.currentState = $scope.position.checkStatus;
                            isFirstCheck = 0;
                            $scope.count++;
-//                           $scope.$apply();
                        });
 
 //                    console.log(checkStatus);

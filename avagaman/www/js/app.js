@@ -16,6 +16,7 @@ angular.module('starter', [
     'notify',
     'notification',
     'myhistory',
+    'directive.g+signin',
 ])
 
 .run(function($ionicPlatform) {
@@ -30,6 +31,11 @@ angular.module('starter', [
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+    if (window.cordova) {
+      if (window.BackgroundGeolocation) {
+        BackgroundGeolocationService.configurePlugin(window.BackgroundGeolocation);
+      }
     }
   });
 })

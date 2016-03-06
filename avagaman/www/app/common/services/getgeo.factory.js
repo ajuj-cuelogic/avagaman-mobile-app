@@ -32,7 +32,9 @@ angular.module('getGeo.factory', [])
         console.log(' running');
         if(processing) return;
         processing = true;
+        
         navigator.geolocation.getCurrentPosition(function(position) {
+//         navigator.geolocation.watchPosition(function(position) {
             processing = false;
             console.log(lat, long);
             console.log(position.coords.latitude, position.coords.longitude);

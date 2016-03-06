@@ -4,6 +4,12 @@ angular.module('login.controller', [])
     
     $scope.data = {};
  
+    var user = storageService.getSession();
+    
+    if(user)
+    {
+        $state.go('index.dashboard');
+    }
     $scope.login = function() {
         if($scope.data.username && $scope.data.password)
         {
@@ -29,6 +35,16 @@ angular.module('login.controller', [])
                         template: message
         });
     }
+    
+    $scope.$on('event:google-plus-signin-success', function (event,authResult) {
+        console.log(event);
+        console.log(authResult);
+        // Send login to server or save into cookie
+    });
+    $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
+      // Auth failure or signout detected
+    });
+    
     
     
 })
