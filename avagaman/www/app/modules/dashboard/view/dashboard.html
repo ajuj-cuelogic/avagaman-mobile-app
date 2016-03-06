@@ -3,7 +3,8 @@
       <h2>Welcome To Dashboard</h2>
       <h2>Lat: {{position.lat}}</h2>
         <h2>Long: {{position.long}}</h2>
-        <h2>distance: {{distance}}</h2>
+        <h2>distance: {{position.distance}}</h2>
+        <h2>checkStatus {{position.checkStatus}}</h2>
         
         <p> app request {{count}} </p>
         <p> Is Background {{isBackground}} </p>
@@ -24,6 +25,22 @@
             <span ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKOUT"> Checked-Out at {{history.logTime | date : 'shortTime'}}</span>
             <span ng-if="history.logState == CheckinService_DEFAULT_VAL.STATUS_CHECKIN"> Checked-In at {{history.logTime | date : 'shortTime'}}</span>
            
+        </div>
+    </div>
+        
+        <div class="list margin-bottom">
+        <div class="item item-divider">Week's History</div>
+        <div class="row header">
+          <div class="col">Date</div>
+          <div class="col">In Time</div>
+          <div class="col">Out Time</div>
+          <div class="col">Total Hours</div>
+        </div>
+        <div class="row "  ng-repeat="history in dashboardData.userOldHistory">
+         <div class="col">{{history.checkedInTime | date : 'longDate'}}</div>
+          <div class="col">{{history.checkedInTime | date : 'shortTime' }}</div>
+          <div class="col">{{history.checkedOutTime | date : 'shortTime' }}</div>
+          <div class="col">{{checkIntimeDifference(history.checkedInTime , history.checkedOutTime)}}</div>
         </div>
     </div>
         

@@ -43,12 +43,15 @@ angular.module('getGeo.factory', [])
     }
    
     return {
-      begin:function(lt,lg,cb) {
-             long = lg;
-             lat = lt;
-             callback = cb;
-             interval = window.setInterval(getCurrentPosition, duration);
-             getCurrentPosition();
+      begin:function(lt,lg,setIntervelvalue , cb) {
+            long = lg;
+            lat = lt;
+            callback = cb;
+            if(setIntervelvalue)
+            {
+                interval = window.setInterval(getCurrentPosition, duration);
+            }
+            getCurrentPosition();
       }, 
       end: function() {
              window.clearInterval(interval);

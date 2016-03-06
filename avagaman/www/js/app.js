@@ -14,6 +14,8 @@ angular.module('starter', [
     'index',
     'dashboard',
     'notify',
+    'notification',
+    'myhistory',
 ])
 
 .run(function($ionicPlatform) {
@@ -71,7 +73,25 @@ angular.module('starter', [
         }
       }
     })
+    .state('index.notification', {
+      url: '/notifications',
+      views: {
+        'index-notification': {
+            templateUrl: 'app/modules/notification/view/notification.html',
+            controller: 'notificationCtrl'
+        }
+      }
+    })
 
+  .state('index.myhistory', {
+    url: '/myhistory',
+    views: {
+      'index-myhistory': {
+            templateUrl: 'app/modules/myhistory/view/myhistory.html',
+            controller: 'myhistoryCtrl'
+      }
+    }
+  });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
     $httpProvider.interceptors.push('sessionService');

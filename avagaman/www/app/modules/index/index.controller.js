@@ -11,12 +11,11 @@ angular.module('index.controller', [])
     $scope.isBackground = 0;
     $scope.user = storageService.getSession();
     $scope.currentState = $scope.user.logState;;
+    $scope.position.checkStatus = $scope.currentState;
     $scope.CheckinService_DEFAULT_VAL = CheckinService.DEFAULT_VAL;
     $scope.lastCheckTime = getTimestamp();
     var DEFAULT_VAL_DIFFERENCE_BETWEEN_TWO_CHECKINS = 10; // in secound
     var isFirstCheck = 1;
-    
-    
     
     console.log($scope.lastCheckTime , 'rt');
     
@@ -35,44 +34,57 @@ angular.module('index.controller', [])
         $scope.logout();
     });
     
+    $scope.getDistance = function(setIntervelvalue){
+         CheckinService.check(setIntervelvalue , function(currLat, currLng, dist , checkStatus){
+                $scope.position.lat  = currLat;
+                $scope.position.long = currLng;
+                $scope.position.distance =  dist;
+                $scope.position.checkStatus =  checkStatus;
+                $scope.$apply();
+        });
+    }
+    
     $scope.check = function() {
        
-        if($scope.user)
+        if($scope.user && $scope.position.checkStatus)
         {
-            CheckinService.check(function(currLat, currLng, dist , checkStatus){
-
-
-                   $scope.position.lat  = currLat;
-                   $scope.position.long = currLng;
-                   $scope.distance =  dist;
-                   
+//            CheckinService.check(setIntervelvalue , function(currLat, currLng, dist , checkStatus){
+//
+//
+//                   $scope.position.lat  = currLat;
+//                   $scope.position.long = currLng;
+//                   $scope.distance =  dist;
+//                   
 
 //                console.log($scope.currentState , checkStatus , 'status');
+//                if( 
+//                    (parseInt($scope.currentState) !== parseInt($scope.position.checkStatus)) && 
+//                    ( $scope.timeDifference() > DEFAULT_VAL_DIFFERENCE_BETWEEN_TWO_CHECKINS || isFirstCheck )
+//                )
+//                {
                 if( 
-                    (parseInt($scope.currentState) !== parseInt(checkStatus)) && 
-                    ( $scope.timeDifference() > DEFAULT_VAL_DIFFERENCE_BETWEEN_TWO_CHECKINS || isFirstCheck )
+                    (parseInt($scope.currentState) !== parseInt($scope.position.checkStatus))
                 )
                 {
 
-                        
-
-                       webService.post('user/activity/add' , { username : $scope.user.username , logState  : checkStatus } , function (){
+                       webService.post('user/activity/add' , { username : $scope.user.username , logState  : $scope.position.checkStatus } , function (){
                            $scope.lastCheckTime = getTimestamp();
-                           $scope.currentState = checkStatus;
+                           $scope.currentState = $scope.position.checkStatus;
                            isFirstCheck = 0;
                            $scope.count++;
+//                           $scope.$apply();
                        });
 
 //                    console.log(checkStatus);
 
                 }
-                else if ($scope.timeDifference() <= DEFAULT_VAL_DIFFERENCE_BETWEEN_TWO_CHECKINS)
-                {
-                    console.log('not call api ' , 'wait for ' + $scope.timeDifference() + ' minutes!!');
-                }
-                 $scope.$apply();
-
-            });
+//                else if ($scope.timeDifference() <= DEFAULT_VAL_DIFFERENCE_BETWEEN_TWO_CHECKINS)
+//                {
+//                    console.log('not call api ' , 'wait for ' + $scope.timeDifference() + ' minutes!!');
+//                }
+//                 $scope.$apply();
+//
+//            });
         }
        
    }
@@ -95,34 +107,43 @@ angular.module('index.controller', [])
         
       return  secondsDifference;
    }
+   $scope.checkIntimeDifference = function(inTime , outTime){
+       
+        return CheckinService.checkIntimeDifference(inTime , outTime);
+   }
+   
+   
+   
    console.log($scope.timeDifference() , 'difff');
    document.addEventListener('deviceready', function () {
-       var backgroundLocationCheck;
         // Enable background mode while track is playing
       cordova.plugins.backgroundMode.enable();
- 
+//      var backgroundLocationCheck;
       // Called when background mode has been activated
       cordova.plugins.backgroundMode.onactivate = function() {
           
             $scope.isBackground = 1 ;
-             backgroundLocationCheck = setInterval(function() {
-                $scope.check();
+             setInterval(function() {
+                        $scope.getDistance(false);
+                        $scope.check();
             }, 3000);
       }
       
       cordova.plugins.backgroundMode.ondeactivate = function() {
-          
+//          CheckinService.clearGeoIntervelTime();
           $scope.isBackground = 2 ;
-          clearInterval(backgroundLocationCheck);
+//          clearInterval(backgroundLocationCheck);
           
       };
       
       
  
-} );
+}, true );
 
     
-    $scope.check();
-    
+    var callagain = setInterval(function() {
+            $scope.getDistance(false);
+            $scope.check();
+    }, 3000);
     
 })

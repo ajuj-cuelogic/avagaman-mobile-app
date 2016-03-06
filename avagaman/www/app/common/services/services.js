@@ -7,5 +7,7 @@ angular.module('services', [
     'checkin.service',
     'dashboard.service',
     'user.service',
+    'notification.service',
+    'myhistory.service',
 ]);
 

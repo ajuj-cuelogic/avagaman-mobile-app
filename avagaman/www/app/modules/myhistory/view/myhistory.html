@@ -1,0 +1,16 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+        <div class="row header">
+          <div class="col">Date</div>
+          <div class="col">In Time</div>
+          <div class="col">Out Time</div>
+          <div class="col">Total Hours</div>
+        </div>
+        <div class="row "  ng-repeat="history in myHistory">
+          <div class="col">{{history.checkedInTime | date : 'longDate'}}</div>
+          <div class="col">{{history.checkedInTime | date : 'shortTime' }}</div>
+          <div class="col">{{history.checkedOutTime | date : 'shortTime' }}</div>
+          <div class="col">{{checkIntimeDifference(history.checkedInTime , history.checkedOutTime)}}</div>
+        </div>
+  </ion-content>
+</ion-view>
